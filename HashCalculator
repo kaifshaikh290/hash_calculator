@@ -1,0 +1,23 @@
+import hashlib
+
+def calculate_hash(input_string, algorithm='sha256'):
+    if algorithm == 'md5':
+        hash_object = hashlib.md5(input_string.encode())
+    elif algorithm == 'sha1':
+        hash_object = hashlib.sha1(input_string.encode())
+    elif algorithm == 'sha256':
+        hash_object = hashlib.sha256(input_string.encode())
+    else:
+        raise ValueError("Unsupported algorithm. Use 'md5', 'sha1', or 'sha256'.")
+    
+    return hash_object.hexdigest()
+
+if __name__ == "__main__":
+    input_string = input("Enter the string to hash: ")
+    algorithm = input("Enter the hashing algorithm (md5, sha1, sha256): ").strip().lower()
+    
+    try:
+        hash_value = calculate_hash(input_string, algorithm)
+        print(f"The {algorithm} hash of '{input_string}' is: {hash_value}")
+    except ValueError as e:
+        print(e)
